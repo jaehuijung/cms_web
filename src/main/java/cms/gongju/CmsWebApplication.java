@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 
 @MapperScan
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
-public class CmpWebApplication {
+public class CmsWebApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CmpWebApplication.class, args);
+		SpringApplication.run(CmsWebApplication.class, args);
 	}
 
 }
