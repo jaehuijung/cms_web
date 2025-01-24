@@ -15,11 +15,11 @@
             COUNT(ma.`MENU_ID`) group_cnt
         FROM
             tb_account_group ag
-                LEFT JOIN
-            tb_group_menu_auth ma
-            ON
-                ag.`GROUP_ID` = ma.`GROUP_ID`
+                LEFT JOIN tb_group_menu_auth ma
+                    ON ag.`GROUP_ID` = ma.`GROUP_ID`
                     AND ma.`R` = 'Y'
+        WHERE
+            ag.`IS_DELETED` = 'N'
         GROUP BY
             ag.`GROUP_ID`, ag.`GROUP_NAME`, ag.`GROUP_DESC`, ag.`REG_ID`, ag.`REG_DT`, ag.`UPD_ID`, ag.`UPD_DT`;
     </select>
@@ -45,6 +45,7 @@
         (   GROUP_ID,
             GROUP_NAME,
             GROUP_DESC,
+            IS_DELETED,
             REG_ID,
             REG_DT,
             UPD_ID,
@@ -54,10 +55,18 @@
             #{groupId},
             #{groupName},
             #{groupDesc},
+            'N',
             'admin',
             now(),
             null,
             null
         )
     </insert>
+
+    <update id="deleteGroupInfo" parameterType="String">
+        /* deleteGroupInfo */
+        update tb_account_group
+        set IS_DELETED = 'Y'
+        where GROUP_ID = #{groupId}
+    </update>
 </mapper>

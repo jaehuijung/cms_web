@@ -79,4 +79,31 @@ public class groupService {
 
         return returnMap;
     }
+
+    /**
+     * 계정그룹 삭제
+     *
+     * @param paramMap 삭제할 계정그룹 ID
+     * @return 결과 메시지
+     */
+    @SuppressWarnings("unchecked")
+    public Map<String, Object> deleteGroupInfo(Map<String, Object> paramMap){
+        Map<String, Object> returnMap = new HashMap<>();
+        returnMap.put("errorCode",false);
+
+        try {
+            List<String> groupIds = (List<String>) paramMap.get("groupId");
+            for (String groupId : groupIds) {
+                groupMapper.deleteGroupInfo(groupId);
+            }
+
+            returnMap.put("errorCode",true);
+        }
+        catch (Exception e){
+            log.error(e.getMessage());
+        }
+
+        return returnMap;
+    }
+
 }

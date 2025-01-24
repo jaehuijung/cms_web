@@ -65,4 +65,16 @@ public class groupController {
     public Map<String, Object> createGroup(@RequestBody Map<String, Object> paramMap) {
         return groupService.createGroupInfo(paramMap);
     }
+
+    /**
+     * 계정그룹 삭제
+     *
+     * @param paramMap 삭제할 계정그룹 ID
+     * @return 결과 메시지
+     */
+    @PostMapping("/delete")
+    @ResponseBody
+    public Map<String, Object> deleteGroup(@RequestBody Map<String, Object> paramMap) {
+        return groupService.deleteGroupInfo(paramMap);
+    }
 }

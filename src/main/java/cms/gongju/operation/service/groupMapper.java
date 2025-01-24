@@ -34,4 +34,11 @@ public interface groupMapper {
      * @param paramMap 계정그룹 등록 데이터
      */
     void createGroupInfo(Map<String, Object> paramMap);
+
+    /**
+     * 계정그룹 삭제
+     *
+     * @param paramMap 삭제할 계정그룹 ID
+     */
+    void deleteGroupInfo(String groupId);
 }
