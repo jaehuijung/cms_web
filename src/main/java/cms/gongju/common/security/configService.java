@@ -34,4 +34,11 @@ public class configService {
     void updateUserLogin(String userId){
         configMapper.updateUserLogin(userId);
     }
+
+    /**
+     * 시큐리티 : 로그인 한 사용자의 첫 페이지 url 조회
+     */
+    String getFirstPageUrl(String firstPage) {
+        return configMapper.getFirstPageUrl(firstPage);
+    }
 }

@@ -24,8 +24,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         configService.updateUserLogin(userId);
 
+        String firstPage = customUser.getMember().getFirstPage();
+        String redirectUrl = configService.getFirstPageUrl(firstPage);
         // String redirectUrl = "/cable/agency/view";  // 동적으로 URL 설정 가능
-        String redirectUrl = "/patch/dstp/view";
         response.sendRedirect(redirectUrl);         // 성공 시 리다이렉트
     }
 }

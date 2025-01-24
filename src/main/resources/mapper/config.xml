@@ -60,4 +60,12 @@
         SET `LAST_LOGIN` = now()
         WHERE `USER_ID` = #{userId}
     </update>
+
+    <!-- 사용자의 첫 페이지 url 조회 -->
+    <select id="getFirstPageUrl" parameterType="String" resultType="String">
+        select `MENU_PATH`
+        from `tb_menu`
+        where `MENU_ID` = #{firstPage}
+    </select>
+
 </mapper>
