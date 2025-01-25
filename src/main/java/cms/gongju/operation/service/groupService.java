@@ -2,6 +2,8 @@ package cms.gongju.operation.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.List;
@@ -106,4 +108,24 @@ public class groupService {
         return returnMap;
     }
 
+    /**
+     * 계정그룹 메뉴설정 리스트
+     *
+     * @return 결과 메시지
+     */
+    public Map<String, Object> getMenuSettingList(Map<String, Object> paramMap) {
+        Map<String, Object> returnMap = new HashMap<>();
+        returnMap.put("errorCode",false);
+
+        try {
+            List<Map<String, Object>> rows = groupMapper.getMenuSettingList(paramMap);
+            returnMap.put("rows", rows);
+            returnMap.put("errorCode",true);
+        }
+        catch( Exception e){
+            log.error(e.getMessage());
+        }
+
+        return returnMap;
+    }
 }

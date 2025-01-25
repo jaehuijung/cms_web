@@ -591,6 +591,7 @@ main {
 .custom-width-min-50   { min-width: 50px; }
 .custom-width-min-150  { min-width: 150px; }
 .custom-width-min-160  { min-width: 160px; }
+.custom-width-min-700  { min-width: 700px; }
 .custom-width-min-1280 { min-width: 1280px; }
 .custom-width-nowrap   { white-space: nowrap; }
 

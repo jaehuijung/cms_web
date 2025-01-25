@@ -38,7 +38,7 @@
         WHERE BINARY `GROUP_ID` = #{group_id}
     </select>
 
-    <!-- 사용자 정보 등록 -->
+    <!-- 계정 정보 등록 -->
     <insert id="createGroupInfo" parameterType="map">
         /* createGroupInfo */
         insert into tb_account_group
@@ -63,10 +63,15 @@
         )
     </insert>
 
+    <!-- 계정그룹 삭제 -->
     <update id="deleteGroupInfo" parameterType="String">
         /* deleteGroupInfo */
         update tb_account_group
         set IS_DELETED = 'Y'
         where GROUP_ID = #{groupId}
     </update>
+
+    <select id="getMenuSettingList" parameterType="map" resultType="map">
+
+    </select>
 </mapper>

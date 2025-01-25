@@ -24,6 +24,7 @@ public interface groupMapper {
     /**
      * 중복 계정그룹ID 체크
      *
+     * @param group_id 중복 체크할 계정그룹 ID
      * @return 중복 계정그룹ID 여부
      */
     int checkDuplicateId(String group_id);
@@ -38,7 +39,14 @@ public interface groupMapper {
     /**
      * 계정그룹 삭제
      *
-     * @param paramMap 삭제할 계정그룹 ID
+     * @param groupId 삭제할 계정그룹 ID
      */
     void deleteGroupInfo(String groupId);
+
+    /**
+     * 계정그룹 메뉴설정 리스트
+     * @param paramMap 메뉴설정할 계정그룹 ID
+     * @return 결과 메시지
+     */
+    List<Map<String, Object>> getMenuSettingList(Map<String, Object> paramMap);
 }

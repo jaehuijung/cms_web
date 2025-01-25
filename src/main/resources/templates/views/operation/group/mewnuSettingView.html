@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <link th:href="@{/css/layout.css}" rel="stylesheet">
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5;">
+    <div style="margin: 25px; background-color: #fff;">
+        <div class="contentCardWrap custom-width-min-500">
+            <div class="flex-row-between" style="padding: 10px 25px;">
+                <p id="inquiry_time" style="margin: 0;">메뉴 관리(보안통신과 통신망관리팀)</p>
+                <div class="custom-button-wrap custom-margin-left-10">
+                    <select id="selectMenuAuth" class="custom-select custom-width-80" style="">
+                        <option value="D">권한없음</option>
+                        <option value="R">읽기</option>
+                        <option value="R">읽기/수정</option>
+                    </select>
+                    <button type="button" class="custom-btn custom-blue-btn" onclick="searchButton()">저장</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="contentCardWrap custom-width-min-500 custom-margin-bottom-20">
+
+            <div class="custom-border-top-solid">
+                <div id="handsontable-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <th:block layout:fragment="script">
+        <script th:src="@{/js/operation/group/view.js}"></script>
+
+        <script th:inline="javascript">
+            $(function() {
+
+                let handsonColumns = [
+                    createHandsonColumn('menu_id', '메뉴ID'),
+                    createHandsonColumn('menu_name', '메뉴명'),
+                    createHandsonColumn('group_setting', '권한', menuAuthSetting),
+                ];
+
+                let container = document.getElementById('handsontable-container');
+                hot = new Handsontable(container, {
+                    data: [],
+                    columns: handsonColumns,
+                    colHeaders: true,             // 열 헤더 표시
+                    rowHeaders: false,            // 행 번호 표시
+                    contextMenu: true,            // 마우스 오른쪽 클릭 메뉴 활성화
+                    autoRowSize: true,            // 행 높이 자동 조정
+                    autoColumnSize: true,         // 열 높이 자동 조정
+                    columnSorting: true,          // 열 정렬 가능
+                    width: '100%',                // 테이블 너비 지정
+                    height: 500,                  // 테이블 높이 설정
+                    stretchH: 'all',              // 열이 부모 크기에 맞게 늘어남
+                    overflow: 'hidden',
+                });
+
+            });
+
+
+            function menuAuthSetting(row){
+                console.log(row);
+            }
+
+            function createHandsonColumn(field, title, method = null) {
+
+                let column = {
+                    data: field,
+                    title: title,
+                    className: 'htCenter htMiddle', // 가로 및 세로 가운데 정렬
+                };
+
+                // 기본 또는 기타 유형에서는 TextRenderer를 사용
+                column.renderer = function(instance, td, row, col, prop, value, cellProperties) {
+                    Handsontable.renderers.TextRenderer.apply(this, arguments);
+                    td.style.whiteSpace = 'nowrap'; // 줄바꿈 방지
+                };
+
+                // method가 지정된 경우, 커스텀 렌더러 생성
+                if (method && typeof method === 'function') {
+                    column.renderer = function (instance, td, row, col, prop, value, cellProperties) {
+                        // 버튼을 렌더링하며, 전달된 method를 실행하도록 설정
+                        td.innerHTML = `<select><option>a</option></select>`;
+                        return td;
+                    };
+                }
+
+                return column;
+            }
+
+        </script>
+    </th:block>
+</body>
+</html>

@@ -77,4 +77,29 @@ public class groupController {
     public Map<String, Object> deleteGroup(@RequestBody Map<String, Object> paramMap) {
         return groupService.deleteGroupInfo(paramMap);
     }
+
+    /**
+     * 운영관리 > 계정그룹 > 조회 > 계정그룹 메뉴설정 팝업 페이지
+     *
+     * @return 계정그룹 메뉴설정 팝업 뷰 페이지
+     */
+    @GetMapping("/menuSettingView")
+    public String menuSettingView() {
+        return "views/operation/group/mewnuSettingView";
+    }
+
+
+    /**
+     * 계정그룹 메뉴설정 리스트
+     *
+     * @param paramMap 선택한 메뉴설정 계정그룹 ID
+     * @return 결과 메시지
+     */
+    @PostMapping("/menuSettingList")
+    @ResponseBody
+    public Map<String, Object> getMenuSettingList(@RequestBody Map<String, Object> paramMap) {
+        return groupService.getMenuSettingList(paramMap);
+    }
+
+
 }
